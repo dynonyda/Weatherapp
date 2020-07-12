@@ -20,7 +20,20 @@ def getLoc(city):
     url = "http://dataservice.accuweather.com/locations/v1/cities/search?apikey=oSiVGZ7dpRMKj7htAbxAXlTnGmSD7yU6&q={}&details=true&offset=0".format(city)
     rqs = requests.get(url)
     data = rqs.json()
-    locKey = data[0]['Key']
+    
+    if len(data)>1:
+            print("Please choose and copy the key from this list:")
+            print()
+            for kode in data:
+                print("Country: "+ str(kode['Country']['EnglishName']))
+                print("Country: "+ str(kode['Region']['EnglishName']))
+                print("Location Key: "+ str(kode['Key']))
+                print("-------------------------------------")
+
+            print()
+            locKey = input("Paste here the key: ")    
+    else:
+            locKey = data[0]['Key']
 
     return locKey
 
